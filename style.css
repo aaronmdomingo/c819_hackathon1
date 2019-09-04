@@ -164,6 +164,11 @@ body {
   align-items: center;
 }
 
+.playerBox div {
+  background-color: white;
+  opacity: 0.8;
+}
+
 /* DICE CLASSES */
 
 .fortune {
@@ -187,23 +192,21 @@ body {
 }
 
 .Player1Image{
-  background-image:url('images/Player1.png');
+  background-image:url('images/Player1.jpg');
   background-size: cover;
 }
 
 .Player2Image{
-  background-image: url('images/Player2.png');
+  background-image: url('images/Player2.jpg');
   background-size: cover;
 }
 
 .playerBox:nth-child(1){
-  background-image: url('images/Player1.png');
+  background-image: url('images/Player1.jpg');
   background-size: cover;
-  color: white;
 }
 
 .playerBox:nth-child(2){
-  color: white;
-  background-image: url('images/Player2.png');
+  background-image: url('images/Player2.jpg');
   background-size: cover;
 }
