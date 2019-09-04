@@ -18,6 +18,7 @@ class ChariotRace {
   }
 
   rollDice() {
+    this.checkheal();
     var currentPlayer = this.players[this.currentPlayer];
     var diceValuesArray = this.players[this.currentPlayer].diceValues;
     var fortuneValue = 0;
@@ -79,6 +80,14 @@ class ChariotRace {
     this.players[this.currentPlayer].markCurrentTurn();
   }
 
-
+  checkheal() {
+    var currentPlayer = this.players[this.currentPlayer];
+    if (currentPlayer.points.health < 10 && currentPlayer.points.fortune > 3) {
+      if (confirm('You have enough fortune to heal for 3 health! Do you want to heal?')) {
+        currentPlayer.updateHealth(3);
+        currentPlayer.updateFortune(-3);
+      }
+    }
+  }
 
 }

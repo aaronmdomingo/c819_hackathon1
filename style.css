@@ -214,6 +214,7 @@ body {
 .playerBox:nth-child(2){
   background-image: url('images/Player2.jpg');
   background-size: cover;
+}
 
 /* ANIMATIONS */
 
