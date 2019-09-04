@@ -142,7 +142,6 @@ body {
 .playerBox {
   height: 95%;
   width: 20%;
-
   border: 1px solid #a0855b;
 
   display: flex;
@@ -168,21 +167,43 @@ body {
 /* DICE CLASSES */
 
 .fortune {
-  background-image: url('/images/fortune.jpg');
+  background-image: url('images/fortune.jpg');
 }
 
 .giddyUp {
-  background-image: url('/images/giddyUp.jpg');
+  background-image: url('images/giddyUp.jpg');
 }
 
 .laneChange {
-  background-image: url('/images/laneChange.jpg');
+  background-image: url('images/laneChange.jpg');
 }
 
 .speedUpDown {
-  background-image: url('/images/speedUpDown.jpg');
+  background-image: url('images/speedUpDown.jpg');
 }
 
 .weapon {
-  background-image: url('/images/weapon.jpg');
+  background-image: url('images/weapon.jpg');
+}
+
+.Player1Image{
+  background-image:url('images/Player1.png');
+  background-size: cover;
+}
+
+.Player2Image{
+  background-image: url('images/Player2.png');
+  background-size: cover;
+}
+
+.playerBox:nth-child(1){
+  background-image: url('images/Player1.png');
+  background-size: cover;
+  color: white;
+}
+
+.playerBox:nth-child(2){
+  color: white;
+  background-image: url('images/Player2.png');
+  background-size: cover;
 }
