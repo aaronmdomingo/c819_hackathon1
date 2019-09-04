@@ -33,6 +33,14 @@ class Player {
     this.changePoints('fortune', newValue);
   }
 
+  markCurrentTurn() {
+    this.domElements.container.addClass('current');
+  }
+
+  unmarkCurrentTurn() {
+    this.domElements.container.removeClass('current');
+  }
+
   changePoints(type){
     var nextValue = null;
     // check to see if it will increase/decrease

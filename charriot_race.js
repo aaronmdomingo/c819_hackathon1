@@ -11,6 +11,7 @@ class ChariotRace {
     var newPlayer = new Player(name, 12, 4, 3)
     this.players.push(newPlayer);
     newPlayer.render();
+    this.players[this.currentPlayer].markCurrentTurn();
   }
 
   addEventListeners(){
@@ -19,6 +20,17 @@ class ChariotRace {
 
   rollDice() {
     this.dice.renderDice();
+    //UPDATE PLAYER CARDS!!!!
+    
+  }
+
+  goNextPlayer() {
+    this.players[this.currentPlayer].unmarkCurrentTurn();
+    this.currentPlayer++
+    if (this.currentPlayer === this.players.length) {
+      this.currentPlayer = 0;
+    }
+    this.players[this.currentPlayer].markCurrentTurn();
   }
 
 

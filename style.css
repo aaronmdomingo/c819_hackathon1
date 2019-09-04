@@ -149,7 +149,11 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
 
+.current {
+  box-shadow: 0px 0px 5px 5px#a0855b;
+  animation: Pulse 2s linear infinite;
 }
 
 .playerBox > * {
@@ -168,21 +172,35 @@ body {
 /* DICE CLASSES */
 
 .fortune {
-  background-image: url('/images/fortune.jpg');
+  background-image: url('images/fortune.jpg');
 }
 
 .giddyUp {
-  background-image: url('/images/giddyUp.jpg');
+  background-image: url('images/giddyUp.jpg');
 }
 
 .laneChange {
-  background-image: url('/images/laneChange.jpg');
+  background-image: url('images/laneChange.jpg');
 }
 
 .speedUpDown {
-  background-image: url('/images/speedUpDown.jpg');
+  background-image: url('images/speedUpDown.jpg');
 }
 
 .weapon {
-  background-image: url('/images/weapon.jpg');
+  background-image: url('images/weapon.jpg');
+}
+
+/* ANIMATIONS */
+
+@keyframes Pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.95);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
