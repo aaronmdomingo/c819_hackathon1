@@ -148,7 +148,11 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
 
+.current {
+  box-shadow: 0px 0px 5px 5px#a0855b;
+  animation: Pulse 2s linear infinite;
 }
 
 .playerBox > * {
@@ -191,6 +195,7 @@ body {
   background-image: url('images/weapon.jpg');
 }
 
+
 .Player1Image{
   background-image:url('images/Player1.jpg');
   background-size: cover;
@@ -209,4 +214,17 @@ body {
 .playerBox:nth-child(2){
   background-image: url('images/Player2.jpg');
   background-size: cover;
+
+/* ANIMATIONS */
+
+@keyframes Pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.95);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

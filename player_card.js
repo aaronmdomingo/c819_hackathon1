@@ -3,7 +3,7 @@ class Player {
     this.name = name;
     this.maxpoints = {
       speed: 14,
-      fortune: 4,
+      fortune: 6,
       health: 12
     }
     this.points = {
@@ -33,15 +33,22 @@ class Player {
     this.changePoints('fortune', newValue);
   }
 
-  changePoints(type){
-    var nextValue = null;
-    // check to see if it will increase/decrease
-    //check dice values array
+  markCurrentTurn() {
+    this.domElements.container.addClass('current');
+  }
+
+  unmarkCurrentTurn() {
+    this.domElements.container.removeClass('current');
+  }
+
+  changePoints(type, newValue){
+    var nextValue = this.points[type] + newValue;
     if (nextValue > this.maxpoints[type]){
       nextValue = this.maxpoints[type];
     } else if (nextValue < 0){
-
+      nextValue = 0;
     }
+    this.points[type] = nextValue;
     this.update();
   }
 
@@ -71,9 +78,20 @@ class Player {
   }
 
   update(){
+    this.clearText();
     this.domElements.name.text(this.name);
     this.domElements.fortunePoints.text('Fortune: ' + this.points.fortune);
     this.domElements.healthPoints.text('Health Points: ' + this.points.health);
     this.domElements.speedPoints.text('Speed: ' + this.points.speed);
+  }
+
+  clearText() {
+    this.domElements.fortunePoints.text('');
+    this.domElements.healthPoints.text('');
+    this.domElements.speedPoints.text('');
+  }
+
+  move() {
+    
   }
 }
