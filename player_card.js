@@ -1,7 +1,6 @@
 class Player {
-  constructor(name, img, initialHealth, initialSpeed, initialFortune){
+  constructor(name, initialHealth, initialSpeed, initialFortune){
     this.name = name;
-    this.image = img;
     this.maxpoints = {
       speed: 14,
       fortune: 4,
@@ -15,6 +14,7 @@ class Player {
     this.diceValues = [];
     this.domElements = {
       container: null,
+      name: null,
       healthPoints: null,
       speedPoints: null,
       fortunePoints: null
@@ -46,25 +46,31 @@ class Player {
   }
 
   render(){
+
     this.domElements.container=$('<div>', {
       class: 'playerBox',
     })
-    var fortuneContainer = $('<div>', {
+    this.domElements.name = $('<div>', {
+      class: 'playerBox-Name'
+    })
+    this.domElements.fortunePoints = $('<div>', {
       class: 'playerBox-Fortune'
     })
-    var healthContainer = $('<div>', {
+    this.domElements.healthPoints = $('<div>', {
       class: 'playerBox-Health'
     })
-    var speedContainer = $('<div>', {
+    this.domElements.speedPoints = $('<div>', {
       class: 'playerBox-Speed'
     })
-    $('main__PlayerContainer').append(this.domElements.container);
-    this.domElements.container.append(fortuneContainer, healthContainer, speedContainer);
+    $('.main__PlayerContainer').append(this.domElements.container);
+    this.domElements.container.append(this.domElements.name, this.domElements.fortunePoints, this.domElements.healthPoints, this.domElements.speedPoints);
+    this.update();
   }
 
   update(){
-    this.domElements.fortunePoints.text(this.points.fortune);
-    this.domElements.healthPoints.text(this.points.health);
-    this.domElements.speedPoints.text(this.points.speed);
+    this.domElements.name.text(this.name);
+    this.domElements.fortunePoints.text('Fortune: ' + this.points.fortune);
+    this.domElements.healthPoints.text('Health Points: ' + this.points.health);
+    this.domElements.speedPoints.text('Speed: ' + this.points.speed);
   }
 }
