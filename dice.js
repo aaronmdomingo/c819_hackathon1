@@ -8,12 +8,13 @@ class Dice {
   constructor(diceCount) {
     this.diceDom = null;
     this.diceContainer = null;
-    this.possibleValues = ['fortune', 'fortune', 'weapon', 'giddyUp', 'speedUpDown', 'laneChange'];
+    this.possibleValues = ['fortune', 'weapon', 'giddyUp', 'speedUpDown', 'laneChange', 'fortune'];
     this.currentValues = [];
     this.diceCount = diceCount;
   }
   renderDice() {
-    this.diceContainer = $('main__DiceContainer');
+    this.diceContainer = $('.main__DiceContainer');
+    this.diceContainer.empty();
     var tempDiceValues = [];
     for (var dieIndex = 0 ; dieIndex < this.diceCount ; dieIndex++) {
       var randomIndex = Math.floor(Math.random() * this.possibleValues.length);
@@ -49,7 +50,7 @@ class Dice {
     this.currentValues = tempDiceValues;
     return tempDiceValues;
   }
-  
+
   // rollPossibleDice() {
   //   var tempDiceValues = [];
   //   for (var dieIndex = 0 ; dieIndex < this.diceCount ; dieIndex++) {
