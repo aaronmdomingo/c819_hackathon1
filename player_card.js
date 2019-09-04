@@ -71,6 +71,9 @@ class Player {
     })
     $('.main__PlayerContainer').append(this.domElements.container);
     this.domElements.container.append(this.domElements.name, this.domElements.fortunePoints, this.domElements.healthPoints, this.domElements.speedPoints);
+
+    var playerOneDom = $('.trackBox.row1Box1').addClass('Player1Image');
+    var playerTwoDom = $('.trackBox.row2Box1').addClass('Player2Image');
     this.update();
   }
 

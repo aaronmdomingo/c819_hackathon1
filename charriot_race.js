@@ -3,8 +3,7 @@ class ChariotRace {
     this.rollDice = this.rollDice.bind(this)
     this.players = [];
     this.currentPlayer = 0;
-    this.dice = new Dice(5)
-
+    this.dice = new Dice(5);
   }
 
   addPlayer (name){

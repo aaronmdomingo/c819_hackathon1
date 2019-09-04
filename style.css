@@ -142,7 +142,6 @@ body {
 .playerBox {
   height: 95%;
   width: 20%;
-
   border: 1px solid #a0855b;
 
   display: flex;
@@ -169,6 +168,11 @@ body {
   align-items: center;
 }
 
+.playerBox div {
+  background-color: white;
+  opacity: 0.8;
+}
+
 /* DICE CLASSES */
 
 .fortune {
@@ -190,6 +194,26 @@ body {
 .weapon {
   background-image: url('images/weapon.jpg');
 }
+
+
+.Player1Image{
+  background-image:url('images/Player1.jpg');
+  background-size: cover;
+}
+
+.Player2Image{
+  background-image: url('images/Player2.jpg');
+  background-size: cover;
+}
+
+.playerBox:nth-child(1){
+  background-image: url('images/Player1.jpg');
+  background-size: cover;
+}
+
+.playerBox:nth-child(2){
+  background-image: url('images/Player2.jpg');
+  background-size: cover;
 
 /* ANIMATIONS */
 
