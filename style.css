@@ -101,6 +101,31 @@ body {
 
 }
 
+.main__diceRoll {
+  height: 5%;
+  width: 10%;
+
+  font-size: 2.5rem;
+  background-color: #fff;
+  cursor: pointer;
+  border: 2px solid #a0855b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s;
+}
+
+.main__diceRoll:hover {
+  transform: scale(1.1);
+  background-color: #f9f6f2
+}
+
+.main__diceRoll:active {
+  transform: scale(1);
+}
+
 .main__PlayerContainer {
   height: 25%;
   width: 80%;
