@@ -98,7 +98,7 @@ class ChariotRace {
 
       }
     }
-    
+
     currentPlayer.updateHealth(healthValue);
     currentPlayer.updateSpeed(speedValue);
     currentPlayer.updateFortune(fortuneValue);
@@ -110,6 +110,9 @@ class ChariotRace {
           if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase youre speed and 'Cancel' to decrease your speed`)) {
             tempSpeed++;
             game.tempMove++
+            if (game.tempMove > 14) {
+              game.tempMove = 14;
+            }
           } else {
             tempSpeed--
             game.tempMove--
@@ -269,6 +272,7 @@ class ChariotRace {
         currentPlayer.weapon--
         this.tempWeapon--
         game.updateTempStats();
+        this.playSoundMp3('trap');
       }
     } else {
       return;
@@ -281,7 +285,7 @@ class ChariotRace {
     var trap = '.trap';
 
     if($(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).length === 1) {
-      // this.players[this.currentPlayer].health -= 3;
+      this.playSoundWav('trapdamage');
       currentPlayer.updateHealth(-3);
       $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).addClass('shake');
       $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('trap');
@@ -293,9 +297,9 @@ class ChariotRace {
     }
 
     if ($(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).length === 1) {
+      this.playSoundMp3('bump');
       $(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).addClass('shake');
       for (var i = 0; i < this.players.length ; i++) {
-        // this.players[i].points.health--
         this.players[i].updateHealth(-1);
       }
       setTimeout(function() {
@@ -309,6 +313,7 @@ class ChariotRace {
     var winModal = document.getElementById('modal1');
     $('.message').text('Congrats ' + winner + ', you won!');
     $(winModal).show();
+    this.playSoundWav('winGame');
   }
 
   winGameThroughDeath() {
@@ -320,12 +325,24 @@ class ChariotRace {
     var winModal = document.getElementById('modal1');
     $('.message').text('Congrats ' + winner + ', you won!');
     $(winModal).show();
+    this.playSoundMp3('die');
   }
 
   updateTempStats() {
-
     $('.currentStats-Moves').text(`Moves: ${this.tempMove}`);
     $('.currentStats-Weapons').text(`Weapons: ${this.tempWeapon}`);
     $('.currentStats-LaneChange').text(`Lane Change: ${this.tempLaneChange}`);
+  }
+
+  playSoundWav(name) {
+    var audio = new Audio(`sounds/${name}.wav`);
+    audio.volume = 0.2;
+    audio.play();
+  }
+
+  playSoundMp3(name) {
+    var audio = new Audio(`sounds/${name}.mp3`);
+    audio.volume = 0.2;
+    audio.play();
   }
 }
