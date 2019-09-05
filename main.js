@@ -1,4 +1,3 @@
-var game;
 $(document).ready(startApp)
 var game;
 function startApp(){

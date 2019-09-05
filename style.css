@@ -22,6 +22,7 @@ html {
 
 body {
   box-sizing: border-box;
+  font-family: 'Cinzel', serif;
 }
 
 .main {
@@ -210,7 +211,7 @@ body {
 
 .playerBox div {
   background-color: white;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 /* DICE CLASSES */
@@ -246,6 +247,51 @@ body {
   background-size: cover;
 }
 
+#modal1 {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  background-color: white;
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding-top: 150px;
+  overflow: auto;
+}
+
+.modal-content1{
+  background-image: url('images/winmessage.jpg');
+  background-size: cover;
+  color: white;
+  text-shadow: 0 1px 5px black;
+  margin: auto;
+  padding: 90px;
+  border: 1px solid #888888;
+  border-radius: 20px;
+  width: 400px;
+  height: 270px;
+  opacity: 0.85;
+  position: relative;
+  font-size: 32px;
+  text-align: center;
+  justify-content: center;
+}
+
+.close {
+  color:white;
+  text-shadow: 0 1px 5px black;
+  font-size: 20px;
+  top: 25px;
+  right: 25px;
+  position: absolute;
+}
+
+.close:hover{
+  color: darkgray;
+  cursor: pointer;
+}
 /* ANIMATIONS */
 
 @keyframes Pulse {

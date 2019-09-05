@@ -50,6 +50,11 @@ class ChariotRace {
     $('#buttonRight').click(this.moveRight)
     $('#buttonUp').click(this.moveUp);
     $('#buttonDown').click(this.moveDown);
+    $('.close').on('click', function(){
+      var modal1 = document.getElementById('modal1');
+      $(modal1).hide();
+      //start new game here
+    })
     // $('.trackBox').click(this.move);
   }
 
@@ -248,7 +253,10 @@ class ChariotRace {
     var currentLaps = this.players[this.currentPlayer].lapAmount;
 
     if (currentLaps === 2) {
-      console.log('You Won!')
+      var winner = this.players[this.currentPlayer].name;
+      var winModal = document.getElementById('modal1');
+      $('.message').text('Congrats ' + winner + ', you won!');
+      $(winModal).show();
     }
 
   }
