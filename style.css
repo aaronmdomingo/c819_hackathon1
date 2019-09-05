@@ -240,14 +240,26 @@ body {
   background-image:url('images/Player1.jpg');
   background-size: cover;
   background-position: center;
+  z-index: 5;
 }
 
 .Player2Image{
   background-image: url('images/Player2.jpg');
   background-size: cover;
   background-position: center;
+  z-index: 5;
 }
 
+.trap {
+  background-image: url('images/trap.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.shake {
+  animation: Shake 0.5s linear;
+}
 /* ANIMATIONS */
 
 @keyframes Pulse {
@@ -259,5 +271,38 @@ body {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes Shake {
+    10% {
+    transform: translateX(3px) rotate(2deg);
+  }
+    20% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+    30% {
+    transform: translateX(3px) rotate(2deg);
+  }
+    40% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+    50% {
+    transform: translateX(2px) rotate(1deg);
+  }
+    60% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+    70% {
+    transform: translateX(2px) rotate(1deg);
+  }
+    80% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+    90% {
+    transform: translateX(1px) rotate(0);
+  }
+    100% {
+    transform: translateX(-1px) rotate(0);
   }
 }
