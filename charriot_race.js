@@ -49,7 +49,7 @@ class ChariotRace {
     $('#buttonRight').click(this.playerMovement)
     $('#buttonUp').click(this.playerMovement);
     $('#buttonDown').click(this.playerMovement);
-    // $('.trackBox').click(this.move);
+    $('#buttonTrap').click(this.placeTrap);
   }
 
   rollDice() {
@@ -81,11 +81,11 @@ class ChariotRace {
           laneChangeValue++
           break;
         case 'speedUpDown':
-          if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase youre speed and 'Cancel' to decrease your speed`)) {
-            speedValue++;
-          } else {
-            speedValue--;
-          }
+          // if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase youre speed and 'Cancel' to decrease your speed`)) {
+          //   speedValue++;
+          // } else {
+          //   speedValue--;
+          // }
           break;
         case 'weapon':
           weaponValue++
@@ -209,10 +209,13 @@ class ChariotRace {
       this.availableMoves = 0;
       this.goNextPlayer();
     }
-    this.checkWinCondition();
+
+    this.checkForDamage();
+    this.checkHealthWinCondition();
+    this.checkLapWinCondition();
   }
 
-  checkWinCondition() {
+  checkLapWinCondition() {
     var currentLaps = this.players[this.currentPlayer].lapAmount;
 
     if (currentLaps === 2) {
@@ -220,9 +223,60 @@ class ChariotRace {
     }
   }
 
+  checkHealthWinCondition() {
+    var playersAlive = null;
+    for (var i = 0; i < this.players.length; i++) {
+      if (this.players[i].points.health > 0) {
+        playersAlive++
+      }
+    }
+
+    if (playersAlive === 1) {
+      console.log(`WINNER!`)
+    }
+  }
+
   placeTrap() {
-    var weaponAmount = this.players[this.currentPlayer].weapon;
-    console.log(weaponAmount);
+    var currentPlayer = this.players[this.currentPlayer];
+    var currentPlayerClass = currentPlayer.imageClass;
+    var weaponAmount = currentPlayer.weapon;
+
+    if (weaponAmount > 0) {
+      $('.game__TracksContainer').find(`.${currentPlayerClass}`).addClass('trap');
+      currentPlayer.weapon--
+    } else {
+      return;
+    }
+  }
+
+  checkForDamage() {
+    var currentPlayer = this.players[this.currentPlayer];
+    var currentPlayerClass = currentPlayer.imageClass;
+    var trap = '.trap';
+
+    if($(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).length === 1) {
+      this.players[this.currentPlayer].health--;
+      currentPlayer.updateHealth(-1);
+      $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).addClass('shake');
+      $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('trap');
+
+      setTimeout(function() {
+        $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('shake');
+      }, 1000)
+      console.log('You took Damage!') // DO DAMAGE ANIMATION HERE
+    }
+
+    if ($(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).length === 1) {
+      $(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).addClass('shake');
+      for (var i = 0; i < this.players.length ; i++) {
+        this.players[i].points.health--
+        this.players[i].updateHealth(-1);
+      }
+      setTimeout(function() {
+        $(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).removeClass('shake');
+      }, 1000)
+    }
+
   }
 }
 
