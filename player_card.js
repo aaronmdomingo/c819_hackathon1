@@ -10,6 +10,9 @@ class Player {
       lane: lane,
       box: box
     }
+    this.weapon = null;
+    this.laneChange = null;
+    this.lapAmount = null;
     this.imageClass = imageClass;
     this.trackLength = 14;
     this.points = {
@@ -114,7 +117,7 @@ class Player {
       box: box
     }
   }
-  
+
   getPosition(){
     return this.position;
   }
