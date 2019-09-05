@@ -67,22 +67,63 @@ body {
 .game__TracksContainer {
   width: 95%;
   height: 90%;
-
 }
+
 .trackRow{
   display: grid;
   grid-gap: 1px;
-  grid-template-columns: repeat(24, 1fr);
+  grid-template-columns: repeat(20, 1fr);
   height: 50%;
 }
 
 .trackBox {
   border: 1px solid #a0855b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+}
+
+.main__StatsContainer {
+  height: 15%;
+  width: 60%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__CurrentStats {
+  height: 100%;
+  width: 20%;
+
+  background-color: #fff;
+  border: 5px solid #a0855b;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__CurrentStats > * {
+  height: 30%;
+  width: 100%;
+
+  font-size: 2rem;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .main__DiceContainer {
-  height: 15%;
-  width: 50%;
+  height: 100%;
+  width: 75%;
 
   background-color: #fff;
 
@@ -258,7 +299,6 @@ body {
   z-index: 1;
 }
 
-
 #modal1 {
   display: none;
   position: fixed;
@@ -269,26 +309,31 @@ body {
   height: 100%;
   left: 0;
   top: 0;
-  padding-top: 150px;
   overflow: auto;
+  padding-top: 5%;
+  transition: all 0.2s;
 }
 
 .modal-content1{
-  background-image: url('images/winmessage.jpg');
+  background-image: linear-gradient(rgba(0,0,0.1), rgba(0, 0, 0, 0.1)), url('images/winmessage.jpg');
   background-size: cover;
-  color: white;
+  color: #f9f6f2;
   text-shadow: 0 1px 5px black;
   margin: auto;
   padding: 90px;
   border: 1px solid #888888;
   border-radius: 20px;
-  width: 400px;
-  height: 270px;
+  width: 40%;
+  height: 50%;
   opacity: 0.85;
   position: relative;
   font-size: 32px;
   text-align: center;
   justify-content: center;
+  font-size: 4rem;
+
+
+  transition: all 0.2s;
 }
 
 .close {
@@ -298,16 +343,22 @@ body {
   top: 25px;
   right: 25px;
   position: absolute;
+
+  transition: all 0.2s;
 }
 
 .close:hover{
-  color: darkgray;
+  color: #f9f6f2;
   cursor: pointer;
+  transform: scale(1.1);
+}
+
+.close:active {
+  transform: scale(1);
 }
 
 .shake {
   animation: Shake 0.5s linear;
-
 }
 /* ANIMATIONS */
 

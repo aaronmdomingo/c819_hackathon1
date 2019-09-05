@@ -14,7 +14,7 @@ class Player {
     this.laneChange = null;
     this.lapAmount = null;
     this.imageClass = imageClass;
-    this.trackLength = 14;
+    this.trackLength = 20;
     this.points = {
       health: initialHealth,
       speed: initialSpeed,
