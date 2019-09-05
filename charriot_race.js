@@ -1,9 +1,8 @@
 class ChariotRace {
   constructor(){
     this.rollDice = this.rollDice.bind(this);
-    this.moveRight = this.moveRight.bind(this);
-    this.moveUp = this.moveUp.bind(this);
-    this.moveDown = this.moveDown.bind(this);
+    this.playerMovement = this.playerMovement.bind(this);
+    this.placeTrap = this.placeTrap.bind(this);
     this.availableMoves = 0;
     this.players = [];
     this.lanes = []
@@ -47,15 +46,10 @@ class ChariotRace {
 
   addEventListeners(){
     $('#diceRoll').click(this.rollDice);
-    $('#buttonRight').click(this.moveRight)
-    $('#buttonUp').click(this.moveUp);
-    $('#buttonDown').click(this.moveDown);
-    $('.close').on('click', function(){
-      var modal1 = document.getElementById('modal1');
-      $(modal1).hide();
-      //start new game here
-    })
-    // $('.trackBox').click(this.move);
+    $('#buttonRight').click(this.playerMovement)
+    $('#buttonUp').click(this.playerMovement);
+    $('#buttonDown').click(this.playerMovement);
+    $('#buttonTrap').click(this.placeTrap);
   }
 
   rollDice() {
@@ -67,6 +61,7 @@ class ChariotRace {
     var healthValue = 0;
     var weaponValue = 0;
     var laneChangeValue = 0;
+    var speedUpDownValue = 0;
 
     diceValuesArray = this.dice.renderDice();
     console.log(diceValuesArray);
@@ -86,7 +81,11 @@ class ChariotRace {
           laneChangeValue++
           break;
         case 'speedUpDown':
-          speedValue++
+          // if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase youre speed and 'Cancel' to decrease your speed`)) {
+          //   speedValue++;
+          // } else {
+          //   speedValue--;
+          // }
           break;
         case 'weapon':
           weaponValue++
@@ -108,12 +107,8 @@ class ChariotRace {
     currentPlayer.updateFortune(fortuneValue);
     currentPlayer.weapon = weaponValue;
     currentPlayer.laneChange = laneChangeValue;
+
     $('#diceRoll').css('pointer-events', 'none');
-
-    // this.moveCurrentPlayer(0, currentPlayer.points.speed);
-    // this.goNextPlayer();
-    // this.checkheal();
-
   }
 
   goNextPlayer() {
@@ -162,95 +157,129 @@ class ChariotRace {
     this.displayPlayer();
   }
 
-  moveUp() {
-    var currentPlayer = this.players[this.currentPlayer];
-    var playerPosition = currentPlayer.getPosition();
-    var currentLane = playerPosition['lane'];
-    var currentBox = playerPosition['box'];
-    var currentSpeed = this.players[this.currentPlayer].points.speed;
-    var currentLaneChange = currentPlayer.laneChange;
-    console.log(currentLaneChange);
-
-    if (currentLaneChange > 0) {
-      if (currentLane === 0) {
-        game.moveCurrentPlayer(currentLane + 1, currentBox);
-        playerPosition['lane'] = currentLane + 1;
-      } else {
-        game.moveCurrentPlayer(currentLane - 1, currentBox);
-        playerPosition['lane'] = currentLane - 1;
-      }
-
-      playerPosition['box'] = currentBox;
-      this.availableMoves++
-      currentPlayer.laneChange--
-    } else {
-      return;
-    }
-
-    if (this.availableMoves === currentSpeed) {
-      this.availableMoves = 0;
-      this.goNextPlayer();
-    }
-
-    this.checkWinCondition();
-  }
-
-  moveRight() {
+  playerMovement() {
     var currentPlayer = this.players[this.currentPlayer];
     var playerPosition = currentPlayer.getPosition();
     var currentLane = playerPosition['lane'];
     var currentBox = playerPosition['box'];
     var currentSpeed = this.players[this.currentPlayer].points.speed
     var currentWeaponAmount = currentPlayer.weapon;
+    var currentLaneChange = currentPlayer.laneChange;
+    var currentButton = event.target.id;
 
-    game.moveCurrentPlayer(currentLane, currentBox + 1);
-    playerPosition['lane'] = currentLane;
-    playerPosition['box'] = currentBox + 1;
-    this.availableMoves++
+    switch (currentButton) {
+      case 'buttonRight':
+        game.moveCurrentPlayer(currentLane, currentBox + 1);
+        playerPosition['lane'] = currentLane;
+        playerPosition['box'] = currentBox + 1;
+        this.availableMoves++
+        break;
+      case 'buttonUp':
+        if (currentLaneChange > 0) {
+          if (currentLane === 1) {
+            game.moveCurrentPlayer(currentLane - 1, currentBox);
+            playerPosition['lane'] = currentLane - 1;
+          }
+          playerPosition['box'] = currentBox;
+          this.availableMoves++
+          currentPlayer.laneChange--
+        } else {
+          return;
+        }
+          break;
+      case 'buttonDown':
+        if (currentLaneChange > 0) {
+          if (currentLane === 0) {
+            game.moveCurrentPlayer(currentLane + 1, currentBox);
+            playerPosition['lane'] = currentLane + 1;
+          }
+          playerPosition['box'] = currentBox;
+          this.availableMoves++
+          currentPlayer.laneChange--
+        } else {
+          return;
+        }
+        break;
+      default:
+        console.log('Illegal Move!');
+        break;
+    }
 
     if (this.availableMoves === currentSpeed) {
       this.availableMoves = 0;
       this.goNextPlayer();
     }
 
-    this.checkWinCondition();
+    this.checkForDamage();
+    this.checkHealthWinCondition();
+    this.checkLapWinCondition();
   }
 
-  moveDown() {
-    var currentPlayer = this.players[this.currentPlayer];
-    var playerPosition = currentPlayer.getPosition();
-    var currentLane = playerPosition['lane'];
-    var currentBox = playerPosition['box'];
-    var currentSpeed = this.players[this.currentPlayer].points.speed;
-    var currentLaneChange = currentPlayer.laneChange;
-    console.log(currentLaneChange);
+  checkLapWinCondition() {
+    var currentLaps = this.players[this.currentPlayer].lapAmount;
 
-    if (currentLaneChange > 0) {
-      if (currentLane === 0) {
-        game.moveCurrentPlayer(currentLane + 1, currentBox);
-        playerPosition['lane'] = currentLane + 1;
-      } else {
-        game.moveCurrentPlayer(currentLane - 1, currentBox);
-        playerPosition['lane'] = currentLane - 1;
+    if (currentLaps === 2) {
+      console.log(`${this.players[this.currentPlayer].name} won!`)
+    }
+  }
+
+  checkHealthWinCondition() {
+    var playersAlive = null;
+    for (var i = 0; i < this.players.length; i++) {
+      if (this.players[i].points.health > 0) {
+        playersAlive++
       }
+    }
 
-      playerPosition['box'] = currentBox;
-      this.availableMoves++
-      currentPlayer.laneChange--
+    if (playersAlive === 1) {
+      console.log(`WINNER!`)
+    }
+  }
+
+  placeTrap() {
+    var currentPlayer = this.players[this.currentPlayer];
+    var currentPlayerClass = currentPlayer.imageClass;
+    var weaponAmount = currentPlayer.weapon;
+
+    if (weaponAmount > 0) {
+      $('.game__TracksContainer').find(`.${currentPlayerClass}`).addClass('trap');
+      currentPlayer.weapon--
     } else {
       return;
     }
-
-    if (this.availableMoves === currentSpeed) {
-      this.availableMoves = 0;
-      this.goNextPlayer();
-    }
-
-    this.checkWinCondition();
   }
 
-  checkWinCondition() {
-    var currentLaps = this.players[this.currentPlayer].lapAmount;
+  checkForDamage() {
+    var currentPlayer = this.players[this.currentPlayer];
+    var currentPlayerClass = currentPlayer.imageClass;
+    var trap = '.trap';
+
+    if($(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).length === 1) {
+      this.players[this.currentPlayer].health--;
+      currentPlayer.updateHealth(-1);
+      $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).addClass('shake');
+      $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('trap');
+
+      setTimeout(function() {
+        $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('shake');
+      }, 1000)
+      console.log('You took Damage!') // DO DAMAGE ANIMATION HERE
+    }
+
+    if ($(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).length === 1) {
+      $(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).addClass('shake');
+      for (var i = 0; i < this.players.length ; i++) {
+        this.players[i].points.health--
+        this.players[i].updateHealth(-1);
+      }
+      setTimeout(function() {
+        $(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).removeClass('shake');
+      }, 1000)
+    }
+
+  }
+}
+
 
     if (currentLaps === 2) {
       var winner = this.players[this.currentPlayer].name;
@@ -259,50 +288,98 @@ class ChariotRace {
       $(winModal).show();
     }
 
-  }
+/*
+    // this.moveRight = this.moveRight.bind(this);
+    // this.moveUp = this.moveUp.bind(this);
+    // this.moveDown = this.moveDown.bind(this);
 
 
-  // playerMovement() {
+  // moveUp() {
+  //   var currentPlayer = this.players[this.currentPlayer];
+  //   var playerPosition = currentPlayer.getPosition();
+  //   var currentLane = playerPosition['lane'];
+  //   var currentBox = playerPosition['box'];
+  //   var currentSpeed = this.players[this.currentPlayer].points.speed;
+  //   var currentLaneChange = currentPlayer.laneChange;
+
+  //   if (currentLaneChange > 0) {
+  //     if (currentLane === 0) {
+  //       game.moveCurrentPlayer(currentLane + 1, currentBox);
+  //       playerPosition['lane'] = currentLane + 1;
+  //     } else {
+  //       game.moveCurrentPlayer(currentLane - 1, currentBox);
+  //       playerPosition['lane'] = currentLane - 1;
+  //     }
+
+  //     playerPosition['box'] = currentBox;
+  //     this.availableMoves++
+  //     currentPlayer.laneChange--
+  //   } else {
+  //     return;
+  //   }
+
+  //   if (this.availableMoves === currentSpeed) {
+  //     this.availableMoves = 0;
+  //     this.goNextPlayer();
+  //   }
+
+  //   this.checkWinCondition();
+  // }
+
+  // moveRight() {
   //   var currentPlayer = this.players[this.currentPlayer];
   //   var playerPosition = currentPlayer.getPosition();
   //   var currentLane = playerPosition['lane'];
   //   var currentBox = playerPosition['box'];
   //   var currentSpeed = this.players[this.currentPlayer].points.speed
-  //   var movementCount = 0;
+  //   var currentWeaponAmount = currentPlayer.weapon;
+  //   console.log(event.target.id);
 
-  //   document.addEventListener('keydown', function (e) {
-  //     var key = e.key;
-  //     switch (key) {
-  //       case 'ArrowRight':
-  //         game.moveCurrentPlayer(currentLane, currentBox + 1);
-  //         playerPosition['lane'] = currentLane;
-  //         playerPosition['box'] = currentBox + 1;
-  //         key = '';
-  //         break;
-  //       case 'ArrowUp':
-  //         if (currentLane === 0) {
-  //           game.moveCurrentPlayer(currentLane + 1, currentBox);
-  //           playerPosition['lane'] = currentLane + 1;
-  //           playerPosition['box'] = currentBox;
-  //         } else {
-  //           game.moveCurrentPlayer(currentLane - 1, currentBox);
-  //           playerPosition['lane'] = currentLane - 1;
-  //           playerPosition['box'] = currentBox;
-  //         }
-  //         break;
-  //       case 'ArrowDown':
-  //         if (currentLane === 1) {
-  //           game.moveCurrentPlayer(currentLane - 1, currentBox);
-  //           playerPosition['lane'] = currentLane;
-  //           playerPosition['box'] = currentBox + 1;
-  //         } else {
-  //           game.moveCurrentPlayer(currentLane + 1, currentBox);
-  //           playerPosition['lane'] = currentLane;
-  //           playerPosition['box'] = currentBox + 1;
-  //         }
+  //   game.moveCurrentPlayer(currentLane, currentBox + 1);
+  //   playerPosition['lane'] = currentLane;
+  //   playerPosition['box'] = currentBox + 1;
+  //   this.availableMoves++
+
+  //   if (this.availableMoves === currentSpeed) {
+  //     this.availableMoves = 0;
+  //     this.goNextPlayer();
+  //   }
+
+  //   this.checkWinCondition();
+  // }
+
+  // moveDown() {
+  //   var currentPlayer = this.players[this.currentPlayer];
+  //   var playerPosition = currentPlayer.getPosition();
+  //   var currentLane = playerPosition['lane'];
+  //   var currentBox = playerPosition['box'];
+  //   var currentSpeed = this.players[this.currentPlayer].points.speed;
+  //   var currentLaneChange = currentPlayer.laneChange;
+
+  //   if (currentLaneChange > 0) {
+  //     if (currentLane === 0) {
+  //       game.moveCurrentPlayer(currentLane + 1, currentBox);
+  //       playerPosition['lane'] = currentLane + 1;
+  //     } else {
+  //       game.moveCurrentPlayer(currentLane - 1, currentBox);
+  //       playerPosition['lane'] = currentLane - 1;
   //     }
-  //   })
+
+  //     playerPosition['box'] = currentBox;
+  //     this.availableMoves++
+  //     currentPlayer.laneChange--
+  //   } else {
+  //     return;
+  //   }
+
+  //   if (this.availableMoves === currentSpeed) {
+  //     this.availableMoves = 0;
+  //     this.goNextPlayer();
+  //   }
+
+  //   this.checkWinCondition();
+  // }
 
 
 
-}
+*/
