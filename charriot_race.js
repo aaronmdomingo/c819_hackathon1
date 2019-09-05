@@ -50,6 +50,9 @@ class ChariotRace {
     $('#buttonUp').click(this.playerMovement);
     $('#buttonDown').click(this.playerMovement);
     $('#buttonTrap').click(this.placeTrap);
+    $('.close').on('click', function() {
+      $('#modal1').hide();
+    })
   }
 
   rollDice() {
@@ -64,7 +67,6 @@ class ChariotRace {
     var speedUpDownValue = 0;
 
     diceValuesArray = this.dice.renderDice();
-    console.log(diceValuesArray);
 
     for (var valIndex = 0 ; valIndex < diceValuesArray.length ; valIndex++) {
       var diceValue = diceValuesArray[valIndex];
@@ -147,7 +149,7 @@ class ChariotRace {
 
   moveCurrentPlayer(lane, box) {
     var currentPlayer = this.players[this.currentPlayer];
-    if (box >= 14) {
+    if (box >= 24) {
       currentPlayer.lapAmount++
       console.log('current player lap amount', currentPlayer.lapAmount);
       currentPlayer.setPosition(lane, 0);
@@ -219,7 +221,7 @@ class ChariotRace {
     var currentLaps = this.players[this.currentPlayer].lapAmount;
 
     if (currentLaps === 2) {
-      console.log(`${this.players[this.currentPlayer].name} won!`)
+      this.winGame();
     }
   }
 
@@ -232,7 +234,7 @@ class ChariotRace {
     }
 
     if (playersAlive === 1) {
-      console.log(`WINNER!`)
+      this.winGame();
     }
   }
 
@@ -242,8 +244,10 @@ class ChariotRace {
     var weaponAmount = currentPlayer.weapon;
 
     if (weaponAmount > 0) {
-      $('.game__TracksContainer').find(`.${currentPlayerClass}`).addClass('trap');
-      currentPlayer.weapon--
+      if ($(`.game__TracksContainer`).find(`.trap.${currentPlayerClass}`).length === 0) {
+        $('.game__TracksContainer').find(`.${currentPlayerClass}`).addClass('trap');
+        currentPlayer.weapon--
+      }
     } else {
       return;
     }
@@ -255,8 +259,8 @@ class ChariotRace {
     var trap = '.trap';
 
     if($(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).length === 1) {
-      this.players[this.currentPlayer].health--;
-      currentPlayer.updateHealth(-1);
+      this.players[this.currentPlayer].health -= 3;
+      currentPlayer.updateHealth(-3);
       $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).addClass('shake');
       $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('trap');
 
@@ -276,110 +280,13 @@ class ChariotRace {
         $(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).removeClass('shake');
       }, 1000)
     }
+  }
 
+  winGame() {
+    var winner = this.players[this.currentPlayer].name;
+    var winModal = document.getElementById('modal1');
+    $('.message').text('Congrats ' + winner + ', you won!');
+    $(winModal).show();
   }
 }
 
-
-    if (currentLaps === 2) {
-      var winner = this.players[this.currentPlayer].name;
-      var winModal = document.getElementById('modal1');
-      $('.message').text('Congrats ' + winner + ', you won!');
-      $(winModal).show();
-    }
-
-/*
-    // this.moveRight = this.moveRight.bind(this);
-    // this.moveUp = this.moveUp.bind(this);
-    // this.moveDown = this.moveDown.bind(this);
-
-
-  // moveUp() {
-  //   var currentPlayer = this.players[this.currentPlayer];
-  //   var playerPosition = currentPlayer.getPosition();
-  //   var currentLane = playerPosition['lane'];
-  //   var currentBox = playerPosition['box'];
-  //   var currentSpeed = this.players[this.currentPlayer].points.speed;
-  //   var currentLaneChange = currentPlayer.laneChange;
-
-  //   if (currentLaneChange > 0) {
-  //     if (currentLane === 0) {
-  //       game.moveCurrentPlayer(currentLane + 1, currentBox);
-  //       playerPosition['lane'] = currentLane + 1;
-  //     } else {
-  //       game.moveCurrentPlayer(currentLane - 1, currentBox);
-  //       playerPosition['lane'] = currentLane - 1;
-  //     }
-
-  //     playerPosition['box'] = currentBox;
-  //     this.availableMoves++
-  //     currentPlayer.laneChange--
-  //   } else {
-  //     return;
-  //   }
-
-  //   if (this.availableMoves === currentSpeed) {
-  //     this.availableMoves = 0;
-  //     this.goNextPlayer();
-  //   }
-
-  //   this.checkWinCondition();
-  // }
-
-  // moveRight() {
-  //   var currentPlayer = this.players[this.currentPlayer];
-  //   var playerPosition = currentPlayer.getPosition();
-  //   var currentLane = playerPosition['lane'];
-  //   var currentBox = playerPosition['box'];
-  //   var currentSpeed = this.players[this.currentPlayer].points.speed
-  //   var currentWeaponAmount = currentPlayer.weapon;
-  //   console.log(event.target.id);
-
-  //   game.moveCurrentPlayer(currentLane, currentBox + 1);
-  //   playerPosition['lane'] = currentLane;
-  //   playerPosition['box'] = currentBox + 1;
-  //   this.availableMoves++
-
-  //   if (this.availableMoves === currentSpeed) {
-  //     this.availableMoves = 0;
-  //     this.goNextPlayer();
-  //   }
-
-  //   this.checkWinCondition();
-  // }
-
-  // moveDown() {
-  //   var currentPlayer = this.players[this.currentPlayer];
-  //   var playerPosition = currentPlayer.getPosition();
-  //   var currentLane = playerPosition['lane'];
-  //   var currentBox = playerPosition['box'];
-  //   var currentSpeed = this.players[this.currentPlayer].points.speed;
-  //   var currentLaneChange = currentPlayer.laneChange;
-
-  //   if (currentLaneChange > 0) {
-  //     if (currentLane === 0) {
-  //       game.moveCurrentPlayer(currentLane + 1, currentBox);
-  //       playerPosition['lane'] = currentLane + 1;
-  //     } else {
-  //       game.moveCurrentPlayer(currentLane - 1, currentBox);
-  //       playerPosition['lane'] = currentLane - 1;
-  //     }
-
-  //     playerPosition['box'] = currentBox;
-  //     this.availableMoves++
-  //     currentPlayer.laneChange--
-  //   } else {
-  //     return;
-  //   }
-
-  //   if (this.availableMoves === currentSpeed) {
-  //     this.availableMoves = 0;
-  //     this.goNextPlayer();
-  //   }
-
-  //   this.checkWinCondition();
-  // }
-
-
-
-*/
