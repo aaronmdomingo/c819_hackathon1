@@ -64,14 +64,15 @@ body {
 
 
 .game__TracksContainer {
-
-  height: 90%;
   width: 95%;
+  height: 90%;
 
+}
+.trackRow{
   display: grid;
   grid-gap: 1px;
-  grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(14, 1fr);
+  height: 50%;
 }
 
 .trackBox {

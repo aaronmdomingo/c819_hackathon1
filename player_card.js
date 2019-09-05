@@ -1,11 +1,17 @@
 class Player {
-  constructor(name, initialHealth, initialSpeed, initialFortune){
+  constructor(name, initialHealth, initialSpeed, initialFortune, imageClass, lane, box){
     this.name = name;
     this.maxpoints = {
       speed: 14,
       fortune: 6,
       health: 12
     }
+    this.position = {
+      lane: lane,
+      box: box
+    }
+    this.imageClass = imageClass;
+    this.trackLength = 14;
     this.points = {
       health: initialHealth,
       speed: initialSpeed,
@@ -17,7 +23,9 @@ class Player {
       name: null,
       healthPoints: null,
       speedPoints: null,
-      fortunePoints: null
+      fortunePoints: null,
+      trackContainer: null,
+      track: []
     }
   }
 
@@ -69,12 +77,17 @@ class Player {
     this.domElements.speedPoints = $('<div>', {
       class: 'playerBox-Speed'
     })
-    $('.main__PlayerContainer').append(this.domElements.container);
+    // $('.main__PlayerContainer').append(this.domElements.container);
     this.domElements.container.append(this.domElements.name, this.domElements.fortunePoints, this.domElements.healthPoints, this.domElements.speedPoints);
 
-    var playerOneDom = $('.trackBox.row1Box1').addClass('Player1Image');
-    var playerTwoDom = $('.trackBox.row2Box1').addClass('Player2Image');
+    // var playerOneDom = $('.trackBox.row1Box1').addClass('Player1Image');
+    // var playerTwoDom = $('.trackBox.row2Box1').addClass('Player2Image');
+
     this.update();
+    return {
+      track: this.domElements.trackContainer,
+      info: this.domElements.container
+    }
   }
 
   update(){
@@ -91,7 +104,26 @@ class Player {
     this.domElements.speedPoints.text('');
   }
 
-  move() {
-    
+  getImage(){
+    return this.imageClass;
   }
+
+  setPosition( lane, box){
+    this.position = {
+      lane: lane,
+      box: box
+    }
+  }
+  
+  getPosition(){
+    return this.position;
+  }
+
+  // move() {
+  //   $('.main__diceRoll').css('pointer-events', 'none');
+  //   $('.trackBox').css('cursor', 'pointer');
+  //   var tempSpeed = this.points.speed;
+  //   var moveAmount = 0;
+  //   console.log(this);
+  // }
 }
