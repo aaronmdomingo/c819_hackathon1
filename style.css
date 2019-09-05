@@ -239,11 +239,13 @@ body {
 .Player1Image{
   background-image:url('images/Player1.jpg');
   background-size: cover;
+  background-position: center;
 }
 
 .Player2Image{
   background-image: url('images/Player2.jpg');
   background-size: cover;
+  background-position: center;
 }
 
 /* ANIMATIONS */
