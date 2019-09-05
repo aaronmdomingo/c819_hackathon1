@@ -55,6 +55,7 @@ class ChariotRace {
     $('#buttonTrap').click(this.placeTrap);
     $('.close').on('click', function() {
       $('#modal1').hide();
+      location.reload();
     })
   }
 
@@ -97,6 +98,7 @@ class ChariotRace {
 
       }
     }
+    
     currentPlayer.updateHealth(healthValue);
     currentPlayer.updateSpeed(speedValue);
     currentPlayer.updateFortune(fortuneValue);
