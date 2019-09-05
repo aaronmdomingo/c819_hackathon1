@@ -22,7 +22,6 @@ class ChariotRace {
     $('.main__PlayerContainer').append(playerDomElements.info);
     this.players[this.currentPlayer].markCurrentTurn();
     this.displayPlayer( this.players.length-1);
-
   }
 
 
@@ -136,12 +135,12 @@ class ChariotRace {
   }
 
   displayPlayer( playerIndex){
-    if(playerIndex===undefined){
+    if(playerIndex === undefined){
       playerIndex = this.currentPlayer;
     }
     var currentPlayer = this.players[playerIndex]
     var currentImage = currentPlayer.getImage();
-    $('.'+currentImage).removeClass(currentImage);
+    $('.game__TracksContainer').find('.'+currentImage).removeClass(currentImage);
     var playerPosition = currentPlayer.getPosition();
     this.lanes[playerPosition.lane][playerPosition.box].addClass(currentImage);
   }
