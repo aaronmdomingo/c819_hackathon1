@@ -281,6 +281,12 @@ class ChariotRace {
 }
 
 
+    if (currentLaps === 2) {
+      var winner = this.players[this.currentPlayer].name;
+      var winModal = document.getElementById('modal1');
+      $('.message').text('Congrats ' + winner + ', you won!');
+      $(winModal).show();
+    }
 
 /*
     // this.moveRight = this.moveRight.bind(this);
