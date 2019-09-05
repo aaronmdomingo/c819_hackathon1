@@ -52,6 +52,7 @@ class ChariotRace {
     $('#buttonTrap').click(this.placeTrap);
     $('.close').on('click', function() {
       $('#modal1').hide();
+      location.reload();
     })
   }
 
@@ -98,11 +99,6 @@ class ChariotRace {
 
       }
     }
-    // console.log('fortune', fortuneValue);
-    // console.log('speed', speedValue);
-    // console.log('health', healthValue);
-    // console.log('weapon', weaponValue);
-    // console.log('laneChange', laneChangeValue);
 
     currentPlayer.updateHealth(healthValue);
     currentPlayer.updateSpeed(speedValue);
@@ -289,4 +285,3 @@ class ChariotRace {
     $(winModal).show();
   }
 }
-
