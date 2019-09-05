@@ -121,11 +121,4 @@ class Player {
     return this.position;
   }
 
-  // move() {
-  //   $('.main__diceRoll').css('pointer-events', 'none');
-  //   $('.trackBox').css('cursor', 'pointer');
-  //   var tempSpeed = this.points.speed;
-  //   var moveAmount = 0;
-  //   console.log(this);
-  // }
 }

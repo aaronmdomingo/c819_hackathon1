@@ -1,8 +1,3 @@
-/*
-DICE ROLL VALUES
-  SpeedUpDown = #1F40E, 1F434;
-  Weapon = #1F5E1;
-*/
 
 class Dice {
   constructor(diceCount) {
@@ -50,17 +45,4 @@ class Dice {
     this.currentValues = tempDiceValues;
     return tempDiceValues;
   }
-
-  // rollPossibleDice() {
-  //   var tempDiceValues = [];
-  //   for (var dieIndex = 0 ; dieIndex < this.diceCount ; dieIndex++) {
-  //     var randomIndex = Math.floor(Math.random()*this.possibleValues.length);
-  //     var randomValue = this.possibleValues[randomIndex];
-
-  //     switch (randomValue) {
-  //       case 'fortune':
-  //         this.diceDom[dieIndex].addClass
-  //     }
-  //   }
-  // }
 }
