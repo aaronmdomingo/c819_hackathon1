@@ -64,9 +64,8 @@ class Player {
   }
 
   render(){
-
     this.domElements.container=$('<div>', {
-      class: 'playerBox',
+      class: `playerBox ${this.imageClass}`,
     })
     this.domElements.name = $('<div>', {
       class: 'playerBox-Name'
