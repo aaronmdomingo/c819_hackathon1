@@ -11,6 +11,9 @@ class ChariotRace {
     }
     this.currentPlayer = 0;
     this.dice = new Dice(5);
+    this.tempMove = null;
+    this.tempLaneChange = null;
+    this.tempWeapon = null;
   }
 
   addPlayer (name, extraClass, lane, box){
@@ -84,11 +87,7 @@ class ChariotRace {
           laneChangeValue++
           break;
         case 'speedUpDown':
-          // if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase youre speed and 'Cancel' to decrease your speed`)) {
-          //   speedValue++;
-          // } else {
-          //   speedValue--;
-          // }
+          speedUpDownValue++
           break;
         case 'weapon':
           weaponValue++
@@ -99,13 +98,34 @@ class ChariotRace {
 
       }
     }
-
+    
     currentPlayer.updateHealth(healthValue);
     currentPlayer.updateSpeed(speedValue);
     currentPlayer.updateFortune(fortuneValue);
+
+    setTimeout(function() {
+      if (speedUpDownValue > 0) {
+        for (var i = 0; i < speedUpDownValue; i++) {
+          var tempSpeed = 0;
+          if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase youre speed and 'Cancel' to decrease your speed`)) {
+            tempSpeed++;
+            game.tempMove++
+          } else {
+            tempSpeed--
+            game.tempMove--
+          }
+          currentPlayer.updateSpeed(tempSpeed);
+          game.updateTempStats();
+        }
+      }
+    }, 500)
+
+    this.tempWeapon = weaponValue;
+    this.tempLaneChange = laneChangeValue;
+    this.tempMove = currentPlayer.points.speed;
     currentPlayer.weapon = weaponValue;
     currentPlayer.laneChange = laneChangeValue;
-
+    this.updateTempStats();
     $('#diceRoll').css('pointer-events', 'none');
   }
 
@@ -145,7 +165,7 @@ class ChariotRace {
 
   moveCurrentPlayer(lane, box) {
     var currentPlayer = this.players[this.currentPlayer];
-    if (box >= 24) {
+    if (box >= 20) {
       currentPlayer.lapAmount++
       console.log('current player lap amount', currentPlayer.lapAmount);
       currentPlayer.setPosition(lane, 0);
@@ -181,6 +201,7 @@ class ChariotRace {
           playerPosition['box'] = currentBox;
           this.availableMoves++
           currentPlayer.laneChange--
+          this.tempLaneChange--
         } else {
           return;
         }
@@ -194,6 +215,7 @@ class ChariotRace {
           playerPosition['box'] = currentBox;
           this.availableMoves++
           currentPlayer.laneChange--
+          this.tempLaneChange--
         } else {
           return;
         }
@@ -208,6 +230,8 @@ class ChariotRace {
       this.goNextPlayer();
     }
 
+    this.tempMove--
+    this.updateTempStats();
     this.checkForDamage();
     this.checkHealthWinCondition();
     this.checkLapWinCondition();
@@ -230,7 +254,7 @@ class ChariotRace {
     }
 
     if (playersAlive === 1) {
-      this.winGame();
+      this.winGameThroughDeath();
     }
   }
 
@@ -243,6 +267,8 @@ class ChariotRace {
       if ($(`.game__TracksContainer`).find(`.trap.${currentPlayerClass}`).length === 0) {
         $('.game__TracksContainer').find(`.${currentPlayerClass}`).addClass('trap');
         currentPlayer.weapon--
+        this.tempWeapon--
+        game.updateTempStats();
       }
     } else {
       return;
@@ -255,7 +281,7 @@ class ChariotRace {
     var trap = '.trap';
 
     if($(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).length === 1) {
-      this.players[this.currentPlayer].health -= 3;
+      // this.players[this.currentPlayer].health -= 3;
       currentPlayer.updateHealth(-3);
       $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).addClass('shake');
       $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('trap');
@@ -269,7 +295,7 @@ class ChariotRace {
     if ($(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).length === 1) {
       $(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).addClass('shake');
       for (var i = 0; i < this.players.length ; i++) {
-        this.players[i].points.health--
+        // this.players[i].points.health--
         this.players[i].updateHealth(-1);
       }
       setTimeout(function() {
@@ -283,5 +309,23 @@ class ChariotRace {
     var winModal = document.getElementById('modal1');
     $('.message').text('Congrats ' + winner + ', you won!');
     $(winModal).show();
+  }
+
+  winGameThroughDeath() {
+    this.currentPlayer++;
+    if (this.currentPlayer > 1) {
+      this.currentPlayer = 0;
+    }
+    var winner = this.players[this.currentPlayer].name;
+    var winModal = document.getElementById('modal1');
+    $('.message').text('Congrats ' + winner + ', you won!');
+    $(winModal).show();
+  }
+
+  updateTempStats() {
+
+    $('.currentStats-Moves').text(`Moves: ${this.tempMove}`);
+    $('.currentStats-Weapons').text(`Weapons: ${this.tempWeapon}`);
+    $('.currentStats-LaneChange').text(`Lane Change: ${this.tempLaneChange}`);
   }
 }
