@@ -1,0 +1,398 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%; /* 10px  */
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Cinzel', serif;
+}
+
+.main {
+  height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(to bottom, #f9f6f2, #f1d6ab);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.main__TitleContainer {
+  height: 7.5%;
+  width: 50%;
+
+  font-size: 4rem;
+
+  border: 5px solid #a0855b;
+  background-color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__GameContainer {
+  height: 40%;
+  width: 80%;
+
+  background-color: #fff;
+
+  border: 5px solid #a0855b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.game__TracksContainer {
+  width: 95%;
+  height: 90%;
+}
+
+.trackRow{
+  display: grid;
+  grid-gap: 1px;
+  grid-template-columns: repeat(20, 1fr);
+  height: 50%;
+}
+
+.trackBox {
+  border: 1px solid #a0855b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+}
+
+.main__StatsContainer {
+  height: 15%;
+  width: 60%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__CurrentStats {
+  height: 100%;
+  width: 20%;
+
+  background-color: #fff;
+  border: 5px solid #a0855b;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__CurrentStats > * {
+  height: 30%;
+  width: 100%;
+
+  font-size: 2rem;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.main__DiceContainer {
+  height: 100%;
+  width: 75%;
+
+  background-color: #fff;
+
+  border: 5px solid #a0855b;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.main__ButtonsContainer {
+  height: 5%;
+  width: 50%;
+
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+}
+
+.diceBox {
+  height: 75%;
+  width: 12.5%;
+
+  border: 1px solid #a0855b;
+  background-size: cover;
+  background-position: center;
+
+}
+
+.main__Buttons {
+  width: 40%;
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.main__Buttons > * {
+  height: 100%;
+  width: 20%;
+  font-size: 2rem;
+
+  cursor: pointer;
+  background-color: #fff;
+  border: 2px solid #a0855b;
+
+  transition: all 0.2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main__diceRoll {
+  height: 100%;
+  width: 30%;
+
+  font-size: 2.5rem;
+  background-color: #fff;
+  cursor: pointer;
+  border: 2px solid #a0855b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.2s;
+}
+
+.main__diceRoll:hover,
+.main__Buttons > *:hover {
+  transform: scale(1.1);
+  background-color: #f9f6f2
+}
+
+.main__diceRoll:active,
+.main__Buttons > *:active {
+  transform: scale(1);
+}
+
+.main__PlayerContainer {
+  height: 25%;
+  width: 80%;
+
+  background-color: #fff;
+
+  border: 5px solid #a0855b;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.playerBox {
+  height: 95%;
+  width: 20%;
+  border: 1px solid #a0855b;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.current {
+  box-shadow: 0px 0px 5px 5px#a0855b;
+  animation: Pulse 2s linear infinite;
+}
+
+.playerBox > * {
+  height: 20%;
+  width: 50%;
+  font-size: 1.5rem;
+
+  border: 1px solid #a0855b;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playerBox div {
+  background-color: white;
+  opacity: 0.85;
+}
+
+/* DICE CLASSES */
+
+.fortune {
+  background-image: url('images/fortune.jpg');
+}
+
+.giddyUp {
+  background-image: url('images/giddyUp.jpg');
+}
+
+.laneChange {
+  background-image: url('images/laneChange.jpg');
+}
+
+.speedUpDown {
+  background-image: url('images/speedUpDown.jpg');
+}
+
+.weapon {
+  background-image: url('images/weapon.jpg');
+}
+
+
+.Player1Image{
+  background-image:url('images/Player1.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 5;
+}
+
+.Player2Image{
+  background-image: url('images/Player2.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 5;
+}
+
+.trap {
+  background-image: url('images/trap.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+#modal1 {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  background-color: white;
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  padding-top: 5%;
+  transition: all 0.2s;
+}
+
+.modal-content1{
+  background-image: linear-gradient(rgba(0,0,0.1), rgba(0, 0, 0, 0.1)), url('images/winmessage.jpg');
+  background-size: cover;
+  color: #f9f6f2;
+  text-shadow: 0 1px 5px black;
+  margin: auto;
+  padding: 90px;
+  border: 1px solid #888888;
+  border-radius: 20px;
+  width: 40%;
+  height: 50%;
+  opacity: 0.85;
+  position: relative;
+  font-size: 32px;
+  text-align: center;
+  justify-content: center;
+  font-size: 4rem;
+
+
+  transition: all 0.2s;
+}
+
+.close {
+  color:white;
+  text-shadow: 0 1px 5px black;
+  font-size: 20px;
+  top: 25px;
+  right: 25px;
+  position: absolute;
+
+  transition: all 0.2s;
+}
+
+.close:hover{
+  color: #f9f6f2;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.close:active {
+  transform: scale(1);
+}
+
+.shake {
+  animation: Shake 0.5s linear;
+}
+/* ANIMATIONS */
+
+@keyframes Pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes Shake {
+    10% {
+    transform: translateX(3px) rotate(2deg);
+  }
+    20% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+    30% {
+    transform: translateX(3px) rotate(2deg);
+  }
+    40% {
+    transform: translateX(-3px) rotate(-2deg);
+  }
+    50% {
+    transform: translateX(2px) rotate(1deg);
+  }
+    60% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+    70% {
+    transform: translateX(2px) rotate(1deg);
+  }
+    80% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+    90% {
+    transform: translateX(1px) rotate(0);
+  }
+    100% {
+    transform: translateX(-1px) rotate(0);
+  }
+}

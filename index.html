@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
+  <title>Chariot Race</title>
+</head>
+<body>
+  <div class="main">
+    <div id="modal1">
+      <div class="modal-content1">
+        <span class="close">Play Again?</span>
+        <div class="message">Congrats, you've won!</div>
+      </div>
+    </div>
+    <div class="main__TitleContainer">
+      Chariot Race
+    </div>
+    <div class="main__GameContainer">
+      <div class="game__TracksContainer">
+      </div>
+    </div>
+    <div class="main__StatsContainer">
+      <div class="main__CurrentStats">
+        <div class="currentStats-Moves"></div>
+        <div class="currentStats-Weapons"></div>
+        <div class="currentStats-LaneChange"></div>
+
+      </div>
+      <div class="main__DiceContainer">
+      </div>
+    </div>
+    <div class="main__ButtonsContainer">
+      <div class="main__Buttons">
+        <div class="main__Buttons-Up" id="buttonUp">Up</div>
+        <div class="main__Buttons-Down" id="buttonDown">Down</div>
+        <div class="main__Buttons-Right" id="buttonRight">Right</div>
+        <div class="main__Buttons-Trap" id="buttonTrap">Trap</div>
+      </div>
+      <div class="main__diceRoll" id="diceRoll">Roll Dice</div>
+    </div>
+    <div class="main__PlayerContainer">
+    </div>
+  </div>
+
+  <script src="dice.js"></script>
+  <script src="player_card.js"></script>
+  <script src="charriot_race.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

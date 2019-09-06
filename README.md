@@ -1,5 +1,7 @@
 # c819_hackathon1
 
+Figma: https://www.figma.com/file/XTtdgVqpseacoaNWHb3q8E/Chariots-Race-WireFrame?node-id=0%3A1
+
 # complete the project assigned to your group.  All projects MUST be in OOP
 
 - 1 person fork this repo.
@@ -40,16 +42,15 @@
 
 ### Team 5
 - Project : Imhotep
-- members: 
+- members:
   - Anjaleena Barclay
   - Noel Carino
   - Tarun Padath
   - Michael Chang
-  
+
 ### Team 6
 - Project : Gemstone Mining
-- members: 
+- members:
   - James Cho
   - Uzair Ashraf
   - Sean Hughes
-
