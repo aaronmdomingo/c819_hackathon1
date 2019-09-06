@@ -148,7 +148,7 @@ class ChariotRace {
     var currentPlayer = this.players[this.currentPlayer];
     var currentName = this.players[this.currentPlayer].name;
     if (currentPlayer.points.health < 10 && currentPlayer.points.fortune > 3) {
-      if (confirm(`${currentName}, you have enough fortune to heal for 3 health! Do you want to heal?`)) {
+      if (confirm(`${currentName}, you have enough fortune to heal for 3 health! Do you want to use 3 fortune to heal?`)) {
         currentPlayer.updateHealth(3);
         currentPlayer.updateFortune(-3);
       }
