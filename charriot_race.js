@@ -170,7 +170,6 @@ class ChariotRace {
     var currentPlayer = this.players[this.currentPlayer];
     if (box >= 20) {
       currentPlayer.lapAmount++
-      console.log('current player lap amount', currentPlayer.lapAmount);
       currentPlayer.setPosition(lane, 0);
     } else {
       currentPlayer.setPosition(lane, box);
@@ -293,7 +292,7 @@ class ChariotRace {
       setTimeout(function() {
         $(`.game__TracksContainer`).find(`${trap}.${currentPlayerClass}`).removeClass('shake');
       }, 1000)
-      console.log('You took Damage!') // DO DAMAGE ANIMATION HERE
+      console.log('You took Damage!')
     }
 
     if ($(`.game__TracksContainer`).find(`.Player1Image.Player2Image`).length === 1) {
