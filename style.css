@@ -19,7 +19,6 @@ body {
   height: 100vh;
   width: 100vw;
   background-image: linear-gradient(to bottom, #f9f6f2, #f1d6ab);
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -29,12 +28,9 @@ body {
 .main__TitleContainer {
   height: 7.5%;
   width: 50%;
-
   font-size: 4rem;
-
   border: 5px solid #a0855b;
   background-color: #fff;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,11 +39,8 @@ body {
 .main__GameContainer {
   height: 40%;
   width: 80%;
-
   background-color: #fff;
-
   border: 5px solid #a0855b;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,18 +61,15 @@ body {
 
 .trackBox {
   border: 1px solid #a0855b;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   font-size: 2rem;
 }
 
 .main__StatsContainer {
   height: 15%;
   width: 60%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,10 +78,8 @@ body {
 .main__CurrentStats {
   height: 100%;
   width: 20%;
-
   background-color: #fff;
   border: 5px solid #a0855b;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -101,10 +89,7 @@ body {
 .main__CurrentStats > * {
   height: 30%;
   width: 100%;
-
   font-size: 2rem;
-
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,11 +99,8 @@ body {
 .main__DiceContainer {
   height: 100%;
   width: 75%;
-
   background-color: #fff;
-
   border: 5px solid #a0855b;
-
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -127,8 +109,6 @@ body {
 .main__ButtonsContainer {
   height: 5%;
   width: 50%;
-
-
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -138,7 +118,6 @@ body {
 .diceBox {
   height: 75%;
   width: 12.5%;
-
   border: 1px solid #a0855b;
   background-size: cover;
   background-position: center;
@@ -148,7 +127,6 @@ body {
 .main__Buttons {
   width: 40%;
   height: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -159,13 +137,10 @@ body {
   height: 100%;
   width: 20%;
   font-size: 2rem;
-
   cursor: pointer;
   background-color: #fff;
   border: 2px solid #a0855b;
-
   transition: all 0.2s;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -174,16 +149,13 @@ body {
 .main__diceRoll {
   height: 100%;
   width: 30%;
-
   font-size: 2.5rem;
   background-color: #fff;
   cursor: pointer;
   border: 2px solid #a0855b;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   transition: all 0.2s;
 }
 
@@ -201,11 +173,8 @@ body {
 .main__PlayerContainer {
   height: 25%;
   width: 80%;
-
   background-color: #fff;
-
   border: 5px solid #a0855b;
-
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -215,7 +184,6 @@ body {
   height: 95%;
   width: 20%;
   border: 1px solid #a0855b;
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -231,10 +199,7 @@ body {
   height: 20%;
   width: 50%;
   font-size: 1.5rem;
-
   border: 1px solid #a0855b;
-
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -321,8 +286,6 @@ body {
   text-align: center;
   justify-content: center;
   font-size: 4rem;
-
-
   transition: all 0.2s;
 }
 
@@ -333,7 +296,6 @@ body {
   top: 25px;
   right: 25px;
   position: absolute;
-
   transition: all 0.2s;
 }
 

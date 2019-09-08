@@ -55,7 +55,7 @@ class ChariotRace {
     $('#buttonTrap').click(this.placeTrap);
     $('.close').on('click', function() {
       $('#modal1').hide();
-      location.reload();
+      location.reload(); // EDIT RESET FUNCTIONALITY
     })
   }
 
@@ -121,7 +121,7 @@ class ChariotRace {
           game.updateTempStats();
         }
       }
-    }, 500)
+    }, 500) // TURN TO A MODAL
 
     this.tempWeapon = weaponValue;
     this.tempLaneChange = laneChangeValue;
@@ -144,7 +144,7 @@ class ChariotRace {
     this.players[this.currentPlayer].markCurrentTurn();
   }
 
-  checkheal() {
+  checkheal() { // TURN TO A MODAL
     var currentPlayer = this.players[this.currentPlayer];
     var currentName = this.players[this.currentPlayer].name;
     if (currentPlayer.points.health < 10 && currentPlayer.points.fortune > 3) {
