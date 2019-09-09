@@ -44,6 +44,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url('/images/arena.png');
+  background-position: center top;
+  background-size: cover;
 }
 
 
@@ -60,7 +63,7 @@ body {
 }
 
 .trackBox {
-  border: 1px solid #a0855b;
+  border: 1px solid #f1d6ab;
   display: flex;
   justify-content: center;
   align-items: center;
