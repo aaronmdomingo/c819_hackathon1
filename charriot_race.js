@@ -104,25 +104,25 @@ class ChariotRace {
     currentPlayer.updateSpeed(speedValue);
     currentPlayer.updateFortune(fortuneValue);
 
-    setTimeout(function() {
-      if (speedUpDownValue > 0) {
-        for (var i = 0; i < speedUpDownValue; i++) {
-          var tempSpeed = 0;
-          if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase your speed and 'Cancel' to decrease your speed`)) {
-            tempSpeed++;
-            game.tempMove++
-            if (game.tempMove > 14) {
-              game.tempMove = 14;
-            }
-          } else {
-            tempSpeed--
-            game.tempMove--
-          }
-          currentPlayer.updateSpeed(tempSpeed);
-          game.updateTempStats();
-        }
-      }
-    }, 500) // TURN TO A MODAL
+    // setTimeout(function() {
+    //   if (speedUpDownValue > 0) {
+    //     for (var i = 0; i < speedUpDownValue; i++) {
+    //       var tempSpeed = 0;
+    //       if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase your speed and 'Cancel' to decrease your speed`)) {
+    //         tempSpeed++;
+    //         game.tempMove++
+    //         if (game.tempMove > 14) {
+    //           game.tempMove = 14;
+    //         }
+    //       } else {
+    //         tempSpeed--
+    //         game.tempMove--
+    //       }
+    //       currentPlayer.updateSpeed(tempSpeed);
+    //       game.updateTempStats();
+    //     }
+    //   }
+    // }, 500) // TURN TO A MODAL
 
     this.tempWeapon = weaponValue;
     this.tempLaneChange = laneChangeValue;
