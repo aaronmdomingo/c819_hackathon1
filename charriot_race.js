@@ -60,6 +60,7 @@ class ChariotRace {
   }
 
   rollDice() {
+    this.playSoundWav('diceroll');
     $('.main__Buttons').css('pointer-events', 'auto');
     var currentPlayer = this.players[this.currentPlayer];
     var diceValuesArray = this.players[this.currentPlayer].diceValues;
@@ -107,7 +108,7 @@ class ChariotRace {
       if (speedUpDownValue > 0) {
         for (var i = 0; i < speedUpDownValue; i++) {
           var tempSpeed = 0;
-          if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase youre speed and 'Cancel' to decrease your speed`)) {
+          if (confirm(`You rolled for the option to increase or decrease your speed! Press 'Confirm' to increase your speed and 'Cancel' to decrease your speed`)) {
             tempSpeed++;
             game.tempMove++
             if (game.tempMove > 14) {
@@ -232,6 +233,7 @@ class ChariotRace {
       this.goNextPlayer();
     }
 
+    this.playSoundWav('walk');
     this.tempMove--
     this.updateTempStats();
     this.checkForDamage();
